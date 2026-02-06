@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Survey: Symptoms in everyday life</title>
+  <style>
+    :root{
+      /* grob an PDF-Look orientiert */
+      --bg: #eaf4fb;          /* helles Blau */
+      --blue: #0b4f8a;        /* Hauptblau (Überschriften) */
+      --blue-dark: #0a3f73;   /* dunkler für Kästen */
+      --text: #0b4f8a;        /* in PDF ist Text auch blau */
+      --white: #ffffff;
+    }
+
+    *{ box-sizing: border-box; }
+    body{
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    /* “Poster-Seite” in A4-ish Proportionen */
+    .page{
+      width: min(900px, 100vw);
+      aspect-ratio: 210 / 297; /* A4 */
+      margin: 0 auto;
+      background: var(--bg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Top header */
+    .top{
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 18px;
+      align-items: center;
+      padding: 34px 36px 10px 36px;
+    }
+    .uke-logo{
+      width: 120px;
+      height: auto;
+    }
+    .inst{
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--blue);
+    }
+
+    /* Main area: left text + right icon */
+    .main{
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 18px;
+      padding: 10px 36px 0 36px;
+      align-items: start;
+    }
+
+    h1{
+      margin: 24px 0 10px;
+      font-size: 36px;
+      line-height: 1.1;
+      color: var(--blue);
+    }
+
+    h2{
+      margin: 0 0 10px;
+      font-size: 22px;
+      color: var(--blue);
+    }
+
+    .lead{
+      font-size: 18px;
+      line-height: 1.4;
+      max-width: 52ch;
+      margin: 0;
+    }
+
+    .ribbon-wrap{
+      display: grid;
+      place-items: center;
+      padding-top: 40px;
+    }
+    .ribbon{
+      width: 240px;
+      max-width: 100%;
+      height: auto;
+      opacity: 0.95;
+    }
+
+    /* Two columns boxes (Participation / Procedure) */
+    .two-cols{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 26px;
+      padding: 16px 36px 0 36px;
+      margin-top: 6px;
+    }
+
+    .box-title{
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 10px;
+      color: var(--blue);
+    }
+
+    ul{
+      margin: 0;
+      padding-left: 20px;
+      font-size: 16px;
+      line-height: 1.45;
+    }
+    li{ margin: 8px 0; }
+
+    .comp{
+      padding: 14px 36px 0 36px;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--blue);
+    }
+
+    /* Bottom area */
+    .bottom{
+      position: absolute;
+      left: 0; right: 0;
+      bottom: 0;
+      padding: 0 36px 28px 36px;
+    }
+
+    .bottom-grid{
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 22px;
+      align-items: end;
+    }
+
+    /* left bottom: QR + stores + arrows */
+    .left-bottom{
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 14px;
+      align-items: center;
+    }
+    .qr-small{
+      width: 110px;
+      height: 110px;
+      object-fit: contain;
+      background: var(--white);
+      border-radius: 6px;
+      padding: 6px;
+    }
+    .steps{
+      font-size: 12px;
+      line-height: 1.35;
+      color: var(--blue);
+    }
+    .store-row{
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-top: 8px;
+      flex-wrap: wrap;
+    }
+    .store{
+      height: 34px;
+      width: auto;
+    }
+    .mycap{
+      height: 40px;
+      width: auto;
+      border-radius: 8px;
+    }
+
+    /* right bottom: big dark box with QR + text */
+    .callout{
+      background: var(--blue-dark);
+      color: white;
+      border-radius: 6px;
+      padding: 16px 16px;
+      display: grid;
+      grid-template-columns: 132px 1fr;
+      gap: 16px;
+      align-items: center;
+      box-shadow: 0 6px 18px rgba(0,0,0,.12);
+      min-height: 140px;
+    }
+    .qr-big{
+      width: 132px;
+      height: 132px;
+      object-fit: contain;
+      background: white;
+      border-radius: 6px;
+      padding: 8px;
+    }
+    .callout-text{
+      font-size: 28px;
+      font-weight: 800;
+      line-height: 1.05;
+    }
+
+    /* Footer logos */
+    .footer{
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-top: 18px;
+      gap: 12px;
+    }
+    .footer img{
+      height: 34px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    /* Print nicely */
+    @media print{
+      body{ background: white; }
+      .page{ width: 210mm; height: 297mm; aspect-ratio: auto; }
+    }
+
+    /* Small screens */
+    @media (max-width: 720px){
+      .page{ aspect-ratio: auto; }
+      .main{ grid-template-columns: 1fr; }
+      .two-cols{ grid-template-columns: 1fr; }
+      .bottom{ position: relative; padding-top: 18px; }
+      .bottom-grid{ grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+
+    <!-- TOP -->
+    <div class="top">
+      <img class="uke-logo" src="assets/uke_logo.png" alt="UKE Hamburg">
+      <div class="inst">Institute and Polyclinic for Medical Psychology</div>
+    </div>
+
+    <!-- MAIN -->
+    <div class="main">
+      <div>
+        <h1>Survey: Symptoms in everyday life</h1>
+        <h2>Study for cancer patients</h2>
+        <p class="lead">
+          In a scientific study, we are investigating how the symptoms of cancer patients influence each other
+          in everyday life over a longer period of time. To this end, we are conducting a series of short surveys
+          on the symptoms experienced.
+        </p>
+      </div>
+
+      <div class="ribbon-wrap">
+        <img class="ribbon" src="assets/ribbon.png" alt="Cancer ribbon icon">
+      </div>
+    </div>
+
+    <!-- PARTICIPATION / PROCEDURE -->
+    <div class="two-cols">
+      <div>
+        <div class="box-title">Participation:</div>
+        <ul>
+          <li>18 years of age or older</li>
+          <li>Cancer/recurrence diagnosis</li>
+          <li>in German or English</li>
+        </ul>
+      </div>
+      <div>
+        <div class="box-title">Procedure:</div>
+        <ul>
+          <li>Short symptom survey every 3 days for 6 months (approx. 2–3 min)</li>
+          <li>Every 3 months, survey over 12 months (approx. 20–25 min)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="comp">Compensation: €120</div>
+
+    <!-- BOTTOM -->
+    <div class="bottom">
+      <div class="bottom-grid">
+
+        <!-- left: small instructions -->
+        <div class="left-bottom">
+          <img class="qr-small" src="assets/qr.png" alt="QR code">
+          <div class="steps">
+            <div>Scan QR code</div>
+            <div>Click “Participate”</div>
+            <div>Download the “MyCap” app</div>
+            <div>Give your consent</div>
+
+            <div class="store-row">
+              <img class="store" src="assets/google_play.png" alt="Google Play">
+              <img class="store" src="assets/app_store.png" alt="App Store">
+              <img class="mycap" src="assets/mycap_icon.png" alt="MyCap app">
+            </div>
+          </div>
+        </div>
+
+        <!-- right: big callout -->
+        <div class="callout">
+          <img class="qr-big" src="assets/qr.png" alt="QR code">
+          <div class="callout-text">
+            Studies<br/>Participants<br/>wanted
+          </div>
+        </div>
+
+      </div>
+
+      <div class="footer">
+        <img src="assets/dkh.png" alt="German Cancer Aid">
+        <img src="assets/ucc_logo.png" alt="University Cancer Center Hamburg">
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
