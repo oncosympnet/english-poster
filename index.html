@@ -124,111 +124,122 @@
 
     /* Bottom area */
     .bottom{
-      position: absolute;
-      left: 0; right: 0;
-      bottom: 0;
-      padding: 0 36px 28px 36px;
-    }
+  position: absolute;
+  left: 0; right: 0;
+  bottom: 0;
+  padding: 0 36px 28px 36px;
+}
+ /* --- Bottom left block cleanup --- */
+.bottom-grid{
+  display: grid;
+  grid-template-columns: 1.25fr 1fr; /* links etwas mehr Platz */
+  gap: 26px;
+  align-items: stretch;
+}
 
-    .bottom-grid{
-      display: grid;
-      grid-template-columns: 1.15fr 1fr;
-      gap: 22px;
-      align-items: end;
-    }
+/* Linke Karte: Steps + Stores als Einheit */
+.left-card{
+  background: rgba(255,255,255,0.35);
+  border-radius: 10px;
+  padding: 16px 16px;
+  border: 1px solid rgba(11,79,138,0.15);
+}
 
-    /* left bottom: QR + stores + arrows */
-    .left-bottom{
-      display: grid;
-      grid-template-columns: 110px 1fr;
-      gap: 14px;
-      align-items: center;
-    }
-    .qr-small{
-      width: 110px;
-      height: 110px;
-      object-fit: contain;
-      background: var(--white);
-      border-radius: 6px;
-      padding: 6px;
-    }
-    .steps{
-      font-size: 12px;
-      line-height: 1.35;
-      color: var(--blue);
-    }
-    .store-row{
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      margin-top: 8px;
-      flex-wrap: wrap;
-    }
-    .store{
-      height: 34px;
-      width: auto;
-    }
-    .mycap{
-      height: 40px;
-      width: auto;
-      border-radius: 8px;
-    }
+.steps{
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--blue);
+}
 
-    /* right bottom: big dark box with QR + text */
-    .callout{
-      background: var(--blue-dark);
-      color: white;
-      border-radius: 6px;
-      padding: 16px 16px;
-      display: grid;
-      grid-template-columns: 132px 1fr;
-      gap: 16px;
-      align-items: center;
-      box-shadow: 0 6px 18px rgba(0,0,0,.12);
-      min-height: 140px;
-    }
-    .qr-big{
-      width: 132px;
-      height: 132px;
-      object-fit: contain;
-      background: white;
-      border-radius: 6px;
-      padding: 8px;
-    }
-    .callout-text{
-      font-size: 28px;
-      font-weight: 800;
-      line-height: 1.05;
-    }
+.steps a{
+  color: var(--blue);
+  font-weight: 800;
+  text-decoration: underline;
+}
 
-    /* Footer logos */
-    .footer{
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      margin-top: 18px;
-      gap: 12px;
-    }
-    .footer img{
-      height: 34px;
-      width: auto;
-      object-fit: contain;
-    }
+/* Code-Token: etwas “wertiger” */
+.access-code{
+  display: inline-block;
+  background: #fff;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  border: 1px solid rgba(11,79,138,0.25);
+}
 
-    /* Print nicely */
-    @media print{
-      body{ background: white; }
-      .page{ width: 210mm; height: 297mm; aspect-ratio: auto; }
-    }
+/* Store Logos deutlich größer + gleich hoch */
+.store-row{
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
 
-    /* Small screens */
-    @media (max-width: 720px){
-      .page{ aspect-ratio: auto; }
-      .main{ grid-template-columns: 1fr; }
-      .two-cols{ grid-template-columns: 1fr; }
-      .bottom{ position: relative; padding-top: 18px; }
-      .bottom-grid{ grid-template-columns: 1fr; }
-    }
+.store{
+  height: 52px;      /* vorher 34px */
+  width: auto;
+}
+
+.mycap{
+  height: 52px;      /* vorher 40px */
+  width: auto;
+  border-radius: 12px;
+}
+
+/* Callout besser zentriert und typografisch “ruhiger” */
+.callout{
+  background: var(--blue-dark);
+  color: white;
+  border-radius: 10px;
+  padding: 18px 18px;
+  display: grid;
+  grid-template-columns: 1fr; /* kein QR -> eine Spalte */
+  align-items: center;
+  justify-items: center;
+  text-align: center;
+  box-shadow: 0 6px 18px rgba(0,0,0,.12);
+  min-height: 160px;
+}
+
+.callout-text{
+  font-size: 30px;
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: 0.2px;
+}
+
+/* Footer Logos größer und gleichmäßig */
+.footer{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 18px;
+  gap: 18px;
+}
+
+.footer img{
+  height: 48px; /* vorher 34px */
+  width: auto;
+  object-fit: contain;
+}
+
+/* Mobile: Callout unter die Steps, Logos bleiben groß */
+@media (max-width: 720px){
+  .bottom-grid{
+    grid-template-columns: 1fr;
+  }
+  .callout{
+    min-height: 120px;
+  }
+  .store, .mycap{
+    height: 48px;
+  }
+  .footer img{
+    height: 44px;
+  }
+}
   </style>
 </head>
 
@@ -238,7 +249,7 @@
     <!-- TOP -->
     <div class="top">
       <img class="uke-logo" src="assets/uke_logo.jpg" alt="UKE Hamburg">
-      <div class="inst">Institute and Polyclinic for Medical Psychology</div>
+      <div class="inst">Institute and Outpatients Clinic of Medical Psychology</div>
     </div>
 
     <!-- MAIN -->
@@ -280,63 +291,59 @@
     <div class="comp">Compensation: €120</div>
 
     <!-- BOTTOM -->
-    <div class="bottom">
-      <div class="bottom-grid">
+  <!-- BOTTOM -->
+<div class="bottom">
+  <div class="bottom-grid">
 
-<div class="steps" style="font-size:14px;">
-
-  <div style="font-weight:700; margin-bottom:6px;">
-    Start the survey online:
-  </div>
-
-  <div style="margin-bottom:6px;">
-    <a href="https://redcap-mz-test.fit.uke.de/surveys/"
-       target="_blank"
-       rel="noopener noreferrer"
-       style="color:#0b4f8a; font-weight:700; text-decoration:underline;">
-      redcap-mz-test.fit.uke.de/surveys/
-    </a>
-  </div>
-
-  <div>
-    Enter the access code:
-  </div>
-
-  <div style="margin:6px 0 10px 0;">
-    <span style="background:#ffffff; padding:6px 12px; border-radius:6px; font-weight:800; letter-spacing:1px;">
-      9NFWDWHKJ
-    </span>
-  </div>
-
-  <div>Click “Participate”</div>
-  <div>Download the “MyCap” app</div>
-  <div>Give your consent</div>
-
-</div>
-
-            <div class="store-row">
-              <img class="store" src="assets/google_play.png" alt="Google Play">
-              <img class="store" src="assets/app_store.png" alt="App Store">
-              <img class="mycap" src="assets/mycap_icon.png" alt="MyCap app">
-            </div>
-          </div>
+    <!-- left: steps + store logos in one card -->
+    <div class="left-card">
+      <div class="steps">
+        <div style="font-weight:800; margin-bottom:10px;">
+          Start the survey online:
         </div>
 
-        <!-- right: big callout -->
-        <div class="callout">
-          <img class="qr-big" src="assets/qr.png" alt="QR code">
-          <div class="callout-text">
-            Studies<br/>Participants<br/>wanted
-          </div>
+        <div style="margin-bottom:10px;">
+          <a href="https://redcap-mz-test.fit.uke.de/surveys/"
+             target="_blank"
+             rel="noopener noreferrer">
+            redcap-mz-test.fit.uke.de/surveys/
+          </a>
         </div>
 
+        <div style="margin-bottom:6px;">Enter the access code:</div>
+
+        <div style="margin:8px 0 12px 0;">
+          <span class="access-code">9NFWDWHKJ</span>
+        </div>
+
+        <div style="display:grid; gap:4px; margin-top:6px;">
+          <div>1) Click “Participate”</div>
+          <div>2) Download the “MyCap” app</div>
+          <div>3) Give your consent</div>
+        </div>
       </div>
 
-      <div class="footer">
-        <img src="assets/dkh.jpg" alt="German Cancer Aid">
-        <img src="assets/ucc_logo.png" alt="University Cancer Center Hamburg">
+      <div class="store-row">
+        <img class="store" src="assets/google_play.png" alt="Google Play">
+        <img class="store" src="assets/app_store.png" alt="App Store">
+        <img class="mycap" src="assets/mycap_icon.png" alt="MyCap app">
       </div>
     </div>
+
+    <!-- right: big callout -->
+    <div class="callout">
+      <div class="callout-text">
+        Study<br/>participants<br/>wanted
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <img src="assets/dkh.jpg" alt="German Cancer Aid">
+    <img src="assets/ucc_logo.png" alt="University Cancer Center Hamburg">
+  </div>
+</div>
 
   </div>
 </body>
