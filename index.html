@@ -1,331 +1,277 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Survey: Symptoms in everyday life</title>
-  <style>
-    :root{
-      --bg: #eaf4fb;
-      --blue: #0b4f8a;
-      --blue-dark: #0a3f73;
-      --text: #0b4f8a;
-      --white: #ffffff;
-    }
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Survey: Symptoms in everyday life</title>
 
-    *{ box-sizing: border-box; }
-    body{
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-    }
+<style>
+:root{
+  --bg:#eaf4fb;
+  --blue:#0b4f8a;
+  --blue-dark:#0a3f73;
+  --text:#0b4f8a;
+}
 
-    /* “Poster-Seite” in A4-ish Proportionen */
-    .page{
-      width: min(900px, 100vw);
-      aspect-ratio: 210 / 297; /* A4 */
-      margin: 0 auto;
-      background: var(--bg);
-      position: relative;
-      overflow: hidden;
-      padding-bottom: 18px; /* ensures bottom content breathes */
-    }
+*{box-sizing:border-box;}
 
-    /* Top header */
-    .top{
-      display: grid;
-      grid-template-columns: 160px 1fr;
-      gap: 18px;
-      align-items: center;
-      padding: 28px 36px 8px 36px; /* slightly tighter */
-    }
-    .uke-logo{
-      width: 130px; /* a touch bigger */
-      height: auto;
-    }
-    .inst{
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--blue);
-      line-height: 1.2;
-    }
+body{
+  margin:0;
+  font-family:Arial, Helvetica, sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
 
-    /* Main area: left text + right icon */
-    .main{
-      display: grid;
-      grid-template-columns: 1.25fr 0.75fr;
-      gap: 18px;
-      padding: 8px 36px 0 36px;
-      align-items: start;
-    }
+/* ===== PAGE ===== */
+.page{
+  width:min(900px,100vw);
+  aspect-ratio:210/297;
+  margin:0 auto;
+  background:var(--bg);
+  display:flex;
+  flex-direction:column;
+}
 
-    h1{
-      margin: 14px 0 10px;
-      font-size: 36px;
-      line-height: 1.08;
-      color: var(--blue);
-    }
+/* ===== HEADER ===== */
+.top{
+  display:grid;
+  grid-template-columns:200px 1fr;
+  gap:18px;
+  align-items:center;
+  padding:24px 36px 6px 36px;
+}
 
-    h2{
-      margin: 0 0 10px;
-      font-size: 22px;
-      color: var(--blue);
-    }
+/* BIGGER UKE LOGO */
+.uke-logo{
+  width:180px;
+}
 
-    .lead{
-      font-size: 18px;
-      line-height: 1.45;
-      max-width: 55ch;
-      margin: 0;
-    }
+.inst{
+  font-size:18px;
+  font-weight:700;
+}
 
-    .ribbon-wrap{
-      display: grid;
-      place-items: center;
-      padding-top: 18px; /* reduced so CTA isn't pushed down */
-    }
-    .ribbon{
-      width: 230px;
-      max-width: 100%;
-      height: auto;
-      opacity: 0.95;
-    }
+/* ===== MAIN ===== */
+.main{
+  display:grid;
+  grid-template-columns:1.3fr 0.7fr;
+  gap:18px;
+  padding:0 36px;
+}
 
-    /* Two columns boxes (Participation / Procedure) */
-    .two-cols{
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 26px;
-      padding: 14px 36px 0 36px;
-      margin-top: 6px;
-    }
+h1{
+  margin:10px 0 8px;
+  font-size:36px;
+}
 
-    .box-title{
-      font-size: 18px;
-      font-weight: 900;
-      margin-bottom: 10px;
-      color: var(--blue);
-    }
+h2{
+  margin:0 0 8px;
+  font-size:22px;
+}
 
-    ul{
-      margin: 0;
-      padding-left: 20px;
-      font-size: 16px;
-      line-height: 1.5;
-    }
-    li{ margin: 8px 0; }
+.lead{
+  font-size:18px;
+  line-height:1.45;
+}
 
-    .comp{
-      padding: 12px 36px 0 36px;
-      font-size: 18px;
-      font-weight: 900;
-      color: var(--blue);
-    }
+.ribbon{
+  width:200px;
+}
 
-    /* -------- Bottom (simplified) -------- */
-    .bottom{
-      padding: 14px 36px 22px 36px;
-      margin-top: 10px;
-    }
+/* ===== INFO BOXES ===== */
+.two-cols{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:26px;
+  padding:10px 36px 0 36px;
+}
 
-    .cta{
-      background: var(--blue-dark);
-      color: white;
-      border-radius: 14px;
-      padding: 18px 18px;
-      box-shadow: 0 10px 26px rgba(0,0,0,.14);
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 14px;
-    }
+.box-title{
+  font-weight:900;
+  margin-bottom:6px;
+}
 
-    .cta-title{
-      font-size: 24px;
-      font-weight: 900;
-      line-height: 1.1;
-      letter-spacing: 0.2px;
-    }
+ul{
+  margin:0;
+  padding-left:18px;
+  font-size:16px;
+}
 
-    .cta-link{
-      background: rgba(255,255,255,0.12);
-      border: 1px solid rgba(255,255,255,0.20);
-      border-radius: 12px;
-      padding: 14px;
-      display: grid;
-      gap: 10px;
-    }
+/* ===== COMPENSATION (less space!) ===== */
+.comp{
+  padding:6px 36px 4px 36px; /* MUCH tighter */
+  font-size:18px;
+  font-weight:900;
+}
 
-    .cta-link a{
-      color: #fff;
-      font-weight: 900;
-      text-decoration: underline;
-      font-size: 18px;
-      word-break: break-word;
-    }
+/* ===== CTA ===== */
+.bottom{
+  padding:0 36px 14px 36px; /* no top margin anymore */
+}
 
-    .cta-code{
-      display: inline-block;
-      background: #fff;
-      color: var(--blue-dark);
-      padding: 10px 14px;
-      border-radius: 10px;
-      font-weight: 900;
-      letter-spacing: 1px;
-      font-size: 18px;
-      width: fit-content;
-    }
+.cta{
+  background:var(--blue-dark);
+  color:white;
+  border-radius:16px;
+  padding:16px;
+  display:grid;
+  gap:10px;
+}
 
-    .cta-steps{
-      font-size: 16px;
-      line-height: 1.45;
-      display: grid;
-      gap: 4px;
-      margin-top: 2px;
-    }
+.cta-title{
+  font-size:24px;
+  font-weight:900;
+}
 
-    .store-row{
-      display: flex;
-      gap: 14px;
-      align-items: center;
-      flex-wrap: wrap;
-      margin-top: 6px;
-    }
+.cta-link{
+  background:rgba(255,255,255,0.12);
+  border-radius:12px;
+  padding:12px;
+  display:grid;
+  gap:8px;
+}
 
-    .store{
-      height: 70px;
-      width: auto;
-    }
+.cta-link a{
+  color:white;
+  font-size:18px;
+  font-weight:900;
+}
 
-    .mycap{
-      height: 70px;
-      width: auto;
-      border-radius: 16px;
-    }
+.cta-code{
+  background:white;
+  color:var(--blue-dark);
+  padding:8px 14px;
+  border-radius:8px;
+  font-weight:900;
+  width:fit-content;
+}
 
-    .footer{
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 16px;
-      gap: 18px;
-    }
+.cta-steps{
+  font-size:15px;
+}
 
-    .footer img{
-      height: 54px;
-      width: auto;
-      object-fit: contain;
-    }
+/* MUCH BIGGER STORE LOGOS */
+.store-row{
+  display:flex;
+  gap:16px;
+  align-items:center;
+  margin-top:6px;
+}
 
-    /* Print nicely */
-    @media print{
-      body{ background: white; }
-      .page{ width: 210mm; height: 297mm; aspect-ratio: auto; }
-    }
+.store,
+.mycap{
+  height:85px;
+}
 
-    /* Small screens */
-    @media (max-width: 720px){
-      .page{ aspect-ratio: auto; }
+/* ===== FOOTER LOGOS (BIG) ===== */
+.footer{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-top:10px;
+}
 
-      .top{ grid-template-columns: 1fr; padding: 22px 18px 6px 18px; }
-      .uke-logo{ width: 120px; }
+.footer img{
+  height:90px;   /* ← HUGE now */
+}
 
-      .main{ grid-template-columns: 1fr; padding: 6px 18px 0 18px; }
-      .two-cols{ grid-template-columns: 1fr; padding: 12px 18px 0 18px; }
-      .comp{ padding: 10px 18px 0 18px; }
-      .bottom{ padding: 14px 18px 22px 18px; }
+/* ===== MOBILE ===== */
+@media(max-width:720px){
+  .main,
+  .two-cols{
+    grid-template-columns:1fr;
+  }
 
-      .store, .mycap{ height: 62px; }
-      .cta-title{ font-size: 22px; }
-      .footer img{ height: 48px; }
-    }
-  </style>
+  .store,
+  .mycap{
+    height:70px;
+  }
+
+  .footer img{
+    height:70px;
+  }
+}
+</style>
 </head>
 
 <body>
-  <div class="page">
 
-    <!-- TOP -->
-    <div class="top">
-      <img class="uke-logo" src="assets/uke_logo.jpg" alt="UKE Hamburg">
-      <div class="inst">Institute and Outpatients Clinic of Medical Psychology</div>
+<div class="page">
+
+  <div class="top">
+    <img class="uke-logo" src="assets/uke_logo.jpg">
+    <div class="inst">Institute and Outpatients Clinic of Medical Psychology</div>
+  </div>
+
+  <div class="main">
+    <div>
+      <h1>Survey: Symptoms in everyday life</h1>
+      <h2>Study for cancer patients</h2>
+      <p class="lead">
+        In a scientific study, we investigate how symptoms influence each other in everyday life.  
+        Therefore, we conduct short regular surveys.
+      </p>
+    </div>
+    <div style="display:grid;place-items:center;">
+      <img class="ribbon" src="assets/ribbon.png">
+    </div>
+  </div>
+
+  <div class="two-cols">
+    <div>
+      <div class="box-title">Participation:</div>
+      <ul>
+        <li>18+ years</li>
+        <li>Cancer diagnosis</li>
+        <li>German or English</li>
+      </ul>
     </div>
 
-    <!-- MAIN -->
-    <div class="main">
-      <div>
-        <h1>Survey: Symptoms in everyday life</h1>
-        <h2>Study for cancer patients</h2>
-        <p class="lead">
-          In a scientific study, we are investigating how the symptoms of cancer patients influence each other
-          in everyday life over a longer period of time. To this end, we are conducting a series of short surveys
-          on the symptoms experienced.
-        </p>
-      </div>
-
-      <div class="ribbon-wrap">
-        <img class="ribbon" src="assets/ribbon.png" alt="Cancer ribbon icon">
-      </div>
+    <div>
+      <div class="box-title">Procedure:</div>
+      <ul>
+        <li>Short survey every 3 days</li>
+        <li>Long survey every 3 months</li>
+      </ul>
     </div>
+  </div>
 
-    <!-- PARTICIPATION / PROCEDURE -->
-    <div class="two-cols">
-      <div>
-        <div class="box-title">Participation:</div>
-        <ul>
-          <li>18 years of age or older</li>
-          <li>Cancer/recurrence diagnosis</li>
-          <li>in German or English</li>
-        </ul>
-      </div>
-      <div>
-        <div class="box-title">Procedure:</div>
-        <ul>
-          <li>Short symptom survey every 3 days for 6 months (approx. 2–3 min)</li>
-          <li>Every 3 months, survey over 12 months (approx. 20–25 min)</li>
-        </ul>
-      </div>
-    </div>
+  <div class="comp">Compensation: €120</div>
 
-    <div class="comp">Compensation: €120</div>
+  <!-- CTA -->
+  <div class="bottom">
+    <div class="cta">
 
-    <!-- BOTTOM (simplified CTA) -->
-    <div class="bottom">
-      <div class="cta">
-        <div class="cta-title">Study participants wanted</div>
+      <div class="cta-title">Study participants wanted</div>
 
-        <div class="cta-link">
-          <div style="font-weight:900;">Start the survey online:</div>
+      <div class="cta-link">
+        <div><strong>Start online:</strong></div>
+        <a href="https://redcap-mz-test.fit.uke.de/surveys/">redcap-mz-test.fit.uke.de/surveys/</a>
 
-          <a href="https://redcap-mz-test.fit.uke.de/surveys/"
-             target="_blank"
-             rel="noopener noreferrer">
-            redcap-mz-test.fit.uke.de/surveys/
-          </a>
+        <div><strong>Access code:</strong></div>
+        <span class="cta-code">9NFWDWHKJ</span>
 
-          <div style="font-weight:900;">Access code:</div>
-          <span class="cta-code">9NFWDWHKJ</span>
+        <div class="cta-steps">
+          1) Click participate<br>
+          2) Download MyCap<br>
+          3) Give consent<br>
+          4) Start questionnaires!
+        </div>
 
-          <div class="cta-steps">
-            <div>1) Click “Participate”</div>
-            <div>2) Download the “MyCap” app</div>
-            <div>3) Give your consent</div>
-          </div>
-
-          <div class="store-row">
-            <img class="store" src="assets/google_play.png" alt="Google Play">
-            <img class="store" src="assets/app_store.png" alt="App Store">
-            <img class="mycap" src="assets/mycap_icon.png" alt="MyCap app">
-          </div>
+        <div class="store-row">
+          <img class="store" src="assets/google_play.png">
+          <img class="store" src="assets/app_store.png">
+          <img class="mycap" src="assets/mycap_icon.png">
         </div>
       </div>
-
-      <div class="footer">
-        <img src="assets/dkh.jpg" alt="German Cancer Aid">
-        <img src="assets/ucc_logo.png" alt="University Cancer Center Hamburg">
-      </div>
     </div>
 
+    <div class="footer">
+      <img src="assets/dkh.jpg">
+      <img src="assets/ucc_logo.png">
+    </div>
   </div>
+
+</div>
 </body>
 </html>
